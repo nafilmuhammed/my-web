@@ -1,7 +1,7 @@
 {
     "Config": {
-      "name": "your name",
-      "country": "your country",
+      "name": "nafy",
+      "country": "INDIA",
       "avatar": "your avtar url",
       "introduction": "",
       "links": {
@@ -11,7 +11,7 @@
         "discord": "https://discord.com/"
       },
       "contact": {
-        "email": "example@gmail.com",
+        "email": "nafilmuhammed@gmail.com",
         "discord": "username",
         "webhook_url": "discord webhook url"
       }
