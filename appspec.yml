@@ -3,8 +3,7 @@ os: linux
 
 files:
   - source: /
-    destination: /home/ubuntu/myapp
-
+    destination: /home/ubuntu/my-web
 hooks:
   BeforeInstall:
     - location: scripts/stop_server.sh
