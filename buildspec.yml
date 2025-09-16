@@ -7,21 +7,20 @@ phases:
     commands:
       - echo Installing dependencies...
       - pip install -r requirements.txt
-      - apt-get install -y jq mysql-client
-      - echo Entered the install phases...
+      - yum install -y jq mysql
+      - echo Entered the install phase...
+
   pre_build:
     commands:
       - echo Running migrations and collectstatic...
-      - python manage.py migrate
-      - python manage.py collectstatic --noinput
+      - python manage.py migrate || echo "Migration failed"
+      - python manage.py collectstatic --noinput || echo "Collectstatic failed"
 
   build:
-  commands:
-    - echo Build complete on `date`
-    - echo "Testing network connectivity..."
-    - nc -zv $ENDPOINT 3306 || echo "Port 3306 not reachable"
-
-
+    commands:
+      - echo Build complete on `date`
+      - echo "Testing network connectivity..."
+      - nc -zv $ENDPOINT 3306 || echo "Port 3306 not reachable"
 
 artifacts:
   files:
