@@ -16,9 +16,11 @@ phases:
       - python manage.py collectstatic --noinput
 
   build:
-    commands:
-      - echo Build complete on `date`
-      - mysql -P 3306 -h $ENDPOINT -u admin -p$DB_PASS
+  commands:
+    - echo Build complete on `date`
+    - echo "Testing network connectivity..."
+    - nc -zv $ENDPOINT 3306 || echo "Port 3306 not reachable"
+
 
 
 artifacts:
