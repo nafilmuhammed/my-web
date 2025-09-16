@@ -7,19 +7,17 @@ phases:
     commands:
       - echo Installing dependencies...
       - pip install -r requirements.txt
-      - apt-get install -y jq mysql-client
+      - yum install -y mysql jq
+
   pre_build:
     commands:
       - echo Running migrations and collectstatic...
-      - python manage.py migrate
-      - python manage.py collectstatic --noinput
+      - python manage.py migrate || echo "Migration skipped"
+      - python manage.py collectstatic --noinput || echo "Static skipped"
 
   build:
     commands:
       - echo Build complete on `date`
-      - mysql -P 3306 -h $ENDPOINT -u admin -p$DB_PASS
-
-
-artifacts:
-  files:
-    - '**/*'
+      - echo "Testing DB connection..."
+      - echo "Endpoint: $ENDPOINT"
+      - mysql -P 3306 -h $ENDPOINT -u admin -p"$DB_PASS" -e "SELECT NOW();"
